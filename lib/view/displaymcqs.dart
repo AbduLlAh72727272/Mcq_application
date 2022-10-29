@@ -28,9 +28,18 @@ class _DisplayMcqsState extends State<DisplayMcqs> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF7456F5),
         onPressed: (){
-          setState(() {
-            ++i;
-          });
+          if(i<=context.read<FetchMcqs>().listById.length){
+            setState(() {
+              ++i;
+            });
+          }
+          else{
+            setState(() {
+              i=0;
+            });
+
+          }
+
 
         },
         child: Icon(

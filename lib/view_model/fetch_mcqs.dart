@@ -19,8 +19,8 @@ class FetchMcqs extends ChangeNotifier{
 
 
 
-  String getMcqsUrl='http://youedx.com/apifile/apifetchalldata/';
-  String getMcqsByIdUrl='https://youedx.com/apifile/api/get_category_index/';
+  String getMcqsUrl='http://youedx.com/apiudex/apifetchalldata/';
+  String getMcqsByIdUrl='https://youedx.com/apiudex/api/get_category_index/';
 
 int _sum=0;
 
