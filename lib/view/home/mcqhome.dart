@@ -41,6 +41,7 @@ class _HomeScreenForMcqsState extends State<HomeScreenForMcqs> {
     super.initState();
     _isLoading = true;
     dataFuture = context.read<FetchMcqs>().getCategory();
+
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         _isLoading = false;
@@ -52,25 +53,7 @@ class _HomeScreenForMcqsState extends State<HomeScreenForMcqs> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF8F6FF),
-      body: FutureBuilder(
-        builder: (ctx, snapshot) {
-          // Checking if future is resolved or not
-          if (snapshot.connectionState == ConnectionState.done) {
-            // If we got an error
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  // '${snapshot.error} occurred',
-                  'Oops An Error Occured',
-                  style: TextStyle(fontSize: 18),
-                ),
-              );
-
-              // if we got our data
-            } else if (snapshot.hasData) {
-              // Extracting data from snapshot object
-              final data = snapshot.data as String;
-              return SingleChildScrollView(
+      body: !_isLoading? SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
@@ -99,7 +82,7 @@ class _HomeScreenForMcqsState extends State<HomeScreenForMcqs> {
                                 /// here
                                 context.read<FetchMcqs>().getListById(
                                     context
-                                        .watch<FetchMcqs>()
+                                        .read<FetchMcqs>()
                                         .categories[index]
                                         .id
                                         .toString(),
@@ -168,12 +151,10 @@ class _HomeScreenForMcqsState extends State<HomeScreenForMcqs> {
                     )
                   ],
                 ),
-              );
-            }
-          }
+              )
 
           // Displaying LoadingSpinner to indicate waiting state
-          return SingleChildScrollView(
+          : SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
@@ -271,12 +252,13 @@ class _HomeScreenForMcqsState extends State<HomeScreenForMcqs> {
                         }),
                   )
                 ],
-              ));
-        },
+
+              ),
+
 
         // Future that needs to be resolved
         // inorder to display something on the Canvas
-        future: dataFuture,
+
       ),
     );
   }

@@ -8,6 +8,7 @@ import '../model/mcqs_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../view/displaymcqs.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class FetchMcqs extends ChangeNotifier{
   List<McqsModel> _fetchMcqs=[];
@@ -32,34 +33,34 @@ int get sum=>_sum;
 
       _category.add(CategoryMcq(id: value['id'], slug: value['slug'], title: value['title'],description: value['description']));
     });
-    final result =
-    await http.get(Uri.parse(getMcqsUrl));
-    final body = json.decode(result.body);
-    // print("getting body iss $body");
-    body.forEach((value) {
-      ++_sum;
-
-      _fetchMcqs.add(McqsModel(id: value['ID'], question: value['Question'], answer1: value['Answer1'], answer2: value['Answer2'], answer3: value['Answer3'], answer4: value['Answer4'], correctAnswer: value['CorrectAnswer'], parentCategory: value['ParentCategory'],
-          childCategory: value['ChildCategory'], updatedAt: value['updated_at'], createdAt: value['updated_at']));
-
-
-
-      // Categories order = new Categories.fromJson(value);
-      // category.add(order);
-    });
+    // final result =
+    // await http.get(Uri.parse(getMcqsUrl));
+    // final body = json.decode(result.body);
+    // // print("getting body iss $body");
+    // body.forEach((value) {
+    //   ++_sum;
+    //
+    //   _fetchMcqs.add(McqsModel(id: value['ID'], question: value['Question'], answer1: value['Answer1'], answer2: value['Answer2'], answer3: value['Answer3'], answer4: value['Answer4'], correctAnswer: value['CorrectAnswer'], parentCategory: value['ParentCategory'],
+    //       childCategory: value['ChildCategory'], updatedAt: value['updated_at'], createdAt: value['updated_at']));
+    //
+    //
+    //
+    //   // Categories order = new Categories.fromJson(value);
+    //   // category.add(order);
+    // });
     notifyListeners();
 
 
-    var firstValue = (body as List).first;
-    //  body.forEach((value) {
-    // mcqs.add(value);
-    //  });
-
-    // return Future.delayed(Duration(seconds: 2), () {
-    //   return "I am data";
-    //   // throw Exception("Custom Error");
-    // });
-    return firstValue;
+    // var firstValue = (body as List).first;
+    // //  body.forEach((value) {
+    // // mcqs.add(value);
+    // //  });
+    //
+    // // return Future.delayed(Duration(seconds: 2), () {
+    // //   return "I am data";
+    // //   // throw Exception("Custom Error");
+    // // });
+    // return firstValue;
   }
   getListById(String childId,BuildContext context){
     for(var id in mcqs){
@@ -76,7 +77,7 @@ int get sum=>_sum;
     notifyListeners();
     // notifyListeners();
     if(_listById.isEmpty){
-      // getAlert(context);
+       getAlert(context);
     }
     else{
       Navigator.push(
@@ -94,6 +95,25 @@ int get sum=>_sum;
     }
 
 
+  }
+  getAlert(BuildContext context){
+    Alert(
+      context: context,
+      type: AlertType.error,
+      title: "Alert",
+      desc: "Currently no items in it.",
+      buttons: [
+        DialogButton(
+          color: Color(0xFF7456F5),
+          child: Text(
+            "Okay",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () => Navigator.pop(context),
+          width: 120,
+        )
+      ],
+    ).show();
   }
 
 
