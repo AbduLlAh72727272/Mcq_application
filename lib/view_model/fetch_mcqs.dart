@@ -19,8 +19,8 @@ class FetchMcqs extends ChangeNotifier{
 
 
 
-  String getMcqsUrl='http://youedx.com/appapi/apifetchalldata/';
-  String getMcqsByIdUrl='https://youedx.com/appapi/api/get_category_index/';
+  String getMcqsUrl='http://youedx.com/apifile/apifetchalldata/';
+  String getMcqsByIdUrl='https://youedx.com/apifile/api/get_category_index/';
 
 int _sum=0;
 
@@ -30,7 +30,7 @@ int get sum=>_sum;
     final catBody=json.decode(categories.body);
     catBody['categories'].forEach((value){
 
-      _category.add(CategoryMcq(id: value['id'], slug: value['slug'], title: value['title'],));
+      _category.add(CategoryMcq(id: value['id'], slug: value['slug'], title: value['title'],description: value['description']));
     });
     final result =
     await http.get(Uri.parse(getMcqsUrl));

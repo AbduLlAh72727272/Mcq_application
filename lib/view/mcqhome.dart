@@ -119,7 +119,12 @@ class _HomeScreenForMcqsState extends State<HomeScreenForMcqs> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Image.network(
-                                        iconImages[index],
+                                        context
+                                            .watch<FetchMcqs>()
+                                            .categories[index].description.toString().isEmpty?iconImages[0]
+                                        :context
+                                            .watch<FetchMcqs>()
+                                            .categories[index].description,
                                         height: 50,
                                         width: 50,
                                         fit: BoxFit.fill,

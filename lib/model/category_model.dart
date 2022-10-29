@@ -9,7 +9,7 @@ class CategoryMcq {
     required this.id,
     required this.slug,
     required  this.title,
-    //  required this.description,
+   required this.description,
     // required  this.parent,
     // required this.postCount,
   });
@@ -17,7 +17,7 @@ class CategoryMcq {
   int id;
   String slug;
   String title;
-  // String description;
+  String description;
   // int parent;
   // int postCount;
 
@@ -25,7 +25,7 @@ class CategoryMcq {
     id: json["id"],
     slug: json["slug"],
     title: json["title"],
-    // description: json["description"],
+    description: json["description"],
     // parent: json["parent"],
     // postCount: json["post_count"],
   );
@@ -34,7 +34,7 @@ class CategoryMcq {
     "id": id,
     "slug": slug,
     "title": title,
-    // "description": description,
+    "description": description,
     // "parent": parent,
     // "post_count": postCount,
   };
