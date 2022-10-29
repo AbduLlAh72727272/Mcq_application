@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:usefulmcqapp/view_model/fetch_mcqs.dart';
 
-import 'displaymcqs.dart';
+import '../displaymcqs.dart';
 
 import 'package:provider/provider.dart';
 

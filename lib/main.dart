@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:usefulmcqapp/view/mcqhome.dart';
+import 'package:usefulmcqapp/view/home/mcqhome.dart';
 import 'package:usefulmcqapp/view/splash/splash.dart';
 import 'package:provider/provider.dart';
 import 'package:usefulmcqapp/view_model/fetch_mcqs.dart';

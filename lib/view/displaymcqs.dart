@@ -99,7 +99,7 @@ class _DisplayMcqsState extends State<DisplayMcqs> {
               height: 10,
             ),
             ListView.builder(
-                itemCount: context.watch<FetchMcqs>().mcqs.length,
+                itemCount: context.watch<FetchMcqs>().listById.length,
                 shrinkWrap: true,
                 padding: EdgeInsets.all(0),
                 itemBuilder: (BuildContext context, int index) {
@@ -111,7 +111,7 @@ class _DisplayMcqsState extends State<DisplayMcqs> {
                         width: MediaQuery.of(context).size.width/1.1,
                         height: 50,
                         child: Text(
-                          context.watch<FetchMcqs>().mcqs[index].question,
+                          context.watch<FetchMcqs>().listById[index].question,
                           // overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: 20,
@@ -159,11 +159,11 @@ class _DisplayMcqsState extends State<DisplayMcqs> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         // mainAxisSize: MainAxisSize.min,
                         children: [
-                          mcqAnswerRow(ansNumber: '1',answer: context.watch<FetchMcqs>().mcqs[index].answer1,
-                            borderColor:context.watch<FetchMcqs>().mcqs[index].correctAnswer=='A'?Colors.deepPurple:Color(0xFFF2F2F2),),
+                          mcqAnswerRow(ansNumber: '1',answer: context.watch<FetchMcqs>().listById[index].answer1,
+                            borderColor:context.watch<FetchMcqs>().listById[index].correctAnswer=='A'?Colors.deepPurple:Color(0xFFF2F2F2),),
                           SizedBox(width: 5,),
 
-                          mcqAnswerRow(ansNumber: '2',answer:context.watch<FetchMcqs>().mcqs[index].answer2,borderColor:context.watch<FetchMcqs>().mcqs[index].correctAnswer=='B'?Colors.deepPurple:Color(0xFFF2F2F2)),
+                          mcqAnswerRow(ansNumber: '2',answer:context.watch<FetchMcqs>().listById[index].answer2,borderColor:context.watch<FetchMcqs>().listById[index].correctAnswer=='B'?Colors.deepPurple:Color(0xFFF2F2F2)),
 
 
                         ],
@@ -175,10 +175,10 @@ class _DisplayMcqsState extends State<DisplayMcqs> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          mcqAnswerRow(ansNumber: '3',answer: context.watch<FetchMcqs>().mcqs[index].answer3,borderColor: context.watch<FetchMcqs>().mcqs[index].correctAnswer=='C'?Colors.deepPurple:Color(0xFFF2F2F2),),
+                          mcqAnswerRow(ansNumber: '3',answer: context.watch<FetchMcqs>().listById[index].answer3,borderColor: context.watch<FetchMcqs>().listById[index].correctAnswer=='C'?Colors.deepPurple:Color(0xFFF2F2F2),),
                           SizedBox(width: 5,),
 
-                          mcqAnswerRow(ansNumber: '4',answer: context.watch<FetchMcqs>().mcqs[index].answer4,borderColor: context.watch<FetchMcqs>().mcqs[index].correctAnswer=='D'?Colors.deepPurple:Color(0xFFF2F2F2),),
+                          mcqAnswerRow(ansNumber: '4',answer: context.watch<FetchMcqs>().listById[index].answer4,borderColor: context.watch<FetchMcqs>().listById[index].correctAnswer=='D'?Colors.deepPurple:Color(0xFFF2F2F2),),
 
 
                         ],

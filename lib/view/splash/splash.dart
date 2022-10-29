@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:usefulmcqapp/view_model/fetch_mcqs.dart';
 
-import '../mcqhome.dart';
+import '../home/mcqhome.dart';
 import 'package:provider/provider.dart';
 
 
