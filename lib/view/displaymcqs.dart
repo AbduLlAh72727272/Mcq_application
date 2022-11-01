@@ -3,6 +3,7 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:usefulmcqapp/view_model/fetch_mcqs.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 
 class DisplayMcqs extends StatefulWidget {
@@ -35,6 +36,24 @@ class _DisplayMcqsState extends State<DisplayMcqs> {
             });
           }
           else{
+            Alert(
+              context: context,
+              type: AlertType.success,
+              title: "Alert",
+              desc: "Congratulations You have read all",
+              buttons: [
+                DialogButton(
+                  child: Text(
+                    "Okay",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                  width: 120,
+                )
+              ],
+            ).show();
+
+
             setState(() {
               i=0;
             });

@@ -149,6 +149,7 @@ class _HomeScreenForMcqsState extends State<HomeScreenForMcqs> {
                                           width: 150,
                                           child: Center(
                                             child: Text(
+                                              index==0?"Islamiat":
                                               context
                                                   .watch<FetchMcqs>()
                                                   .categories[index]
