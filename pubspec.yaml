@@ -53,6 +53,7 @@ dev_dependencies:
   http:
   provider:
   rflutter_alert:
+  cached_network_image:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

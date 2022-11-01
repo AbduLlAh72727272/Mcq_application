@@ -18,40 +18,49 @@ class FetchMcqs extends ChangeNotifier{
   List<McqsModel> _listById=[];
   UnmodifiableListView<McqsModel> get listById=>UnmodifiableListView(_listById);
 
+  late Future<dynamic>  dataFuture;
+  FetchMcqs(){
+    dataFuture=getCategory();
+    notifyListeners();
+  }
 
 
-  String getMcqsUrl='http://youedx.com/apiudex/apifetchalldata/';
-  String getMcqsByIdUrl='https://youedx.com/apiudex/api/get_category_index/';
+
+  String getMcqsUrl='https://youedx.com/apiudex/api/mcqs';
+  String getMcqsByIdUrl='https://youedx.com/apiudex/api/cmcq';
 
 int _sum=0;
 
 int get sum=>_sum;
   Future<dynamic> getCategory() async {
+    _category.clear();
     final categories= await http.get(Uri.parse(getMcqsByIdUrl));
     final catBody=json.decode(categories.body);
-    catBody['categories'].forEach((value){
+   // _category.add(CategoryMcq(id: catBody['data'][0]['id'], slug:  catBody['data'][0]['slug'], title:  catBody['data'][0]['title'],description:  catBody['data'][0]['description']));
+    // catBody['data'][0]['id'];
+    catBody['data'].forEach((value){
 
       _category.add(CategoryMcq(id: value['id'], slug: value['slug'], title: value['title'],description: value['description']));
     });
-    // final result =
-    // await http.get(Uri.parse(getMcqsUrl));
-    // final body = json.decode(result.body);
-    // // print("getting body iss $body");
-    // body.forEach((value) {
-    //   ++_sum;
-    //
-    //   _fetchMcqs.add(McqsModel(id: value['ID'], question: value['Question'], answer1: value['Answer1'], answer2: value['Answer2'], answer3: value['Answer3'], answer4: value['Answer4'], correctAnswer: value['CorrectAnswer'], parentCategory: value['ParentCategory'],
-    //       childCategory: value['ChildCategory'], updatedAt: value['updated_at'], createdAt: value['updated_at']));
-    //
-    //
-    //
-    //   // Categories order = new Categories.fromJson(value);
-    //   // category.add(order);
-    // });
+    final result =
+    await http.get(Uri.parse(getMcqsUrl));
+    final body = json.decode(result.body);
+    // print("getting body iss $body");
+    body['data'].forEach((value) {
+      ++_sum;
+
+      _fetchMcqs.add(McqsModel(id: value['id'].toString(), question: value['question'], answer1: value['answer1'], answer2: value['answer2'], answer3: value['answer3'], answer4: value['answer4'], correctAnswer: value['correctAnswer'], parentCategory: value['parentCategory'],
+          childCategory: value['childCategory'], updatedAt: value['updated_at'], createdAt: value['created_at']));
+
+
+
+      // Categories order = new Categories.fromJson(value);
+      // category.add(order);
+    });
     notifyListeners();
 
 
-    // var firstValue = (body as List).first;
+     // var firstValue = (body as List).first;
     // //  body.forEach((value) {
     // // mcqs.add(value);
     // //  });
@@ -60,11 +69,15 @@ int get sum=>_sum;
     // //   return "I am data";
     // //   // throw Exception("Custom Error");
     // // });
-    // return firstValue;
+     return "Okay";
   }
-  getListById(String childId,BuildContext context){
+  getListById(String title,BuildContext context){
+    _sum=0;
+     print("title is $title");
+
     for(var id in mcqs){
-      if(id.childCategory==childId){
+      // print(id.childCategory);
+      if(id.childCategory==title){
         _listById.add(McqsModel(id: id.childCategory, question: id.question,
             answer1: id.answer1, answer2: id.answer2, answer3: id.answer3,
             answer4: id.answer4, correctAnswer: id.correctAnswer, parentCategory: id.parentCategory,

@@ -4,6 +4,7 @@ import 'package:usefulmcqapp/view_model/fetch_mcqs.dart';
 import '../displaymcqs.dart';
 
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeScreenForMcqs extends StatefulWidget {
   const HomeScreenForMcqs({Key? key}) : super(key: key);
@@ -84,7 +85,7 @@ class _HomeScreenForMcqsState extends State<HomeScreenForMcqs> {
                                     context
                                         .read<FetchMcqs>()
                                         .categories[index]
-                                        .id
+                                        .title
                                         .toString(),
                                     context);
                               },
@@ -101,16 +102,29 @@ class _HomeScreenForMcqsState extends State<HomeScreenForMcqs> {
                                       child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Image.network(
-                                        context
-                                            .watch<FetchMcqs>()
-                                            .categories[index].description.toString().isEmpty?iconImages[0]
-                                        :context
-                                            .watch<FetchMcqs>()
-                                            .categories[index].description,
-                                        height: 50,
-                                        width: 50,
-                                        fit: BoxFit.fill,
+                                      CachedNetworkImage(
+                                        imageUrl: context
+                                          .read<FetchMcqs>()
+                                          .categories[index].description.toString().isEmpty?iconImages[0]
+                                          :context
+                                          .read<FetchMcqs>()
+                                          .categories[index].description,
+                                      height: 50,
+                                      width: 50,
+                                      fit: BoxFit.fill,
+                                        placeholder: (context, url) => Container(),
+                                        errorWidget: (context, url, error) => Icon(Icons.error),
+                                      ),
+                                      // Image.network(
+                                      //   context
+                                      //       .watch<FetchMcqs>()
+                                      //       .categories[index].description.toString().isEmpty?iconImages[0]
+                                      //   :context
+                                      //       .watch<FetchMcqs>()
+                                      //       .categories[index].description,
+                                      //   height: 50,
+                                      //   width: 50,
+                                      //   fit: BoxFit.fill,
                                         // loadingBuilder: (BuildContext context, Widget child,
                                         //     ImageChunkEvent? loadingProgress) {
                                         //   if (loadingProgress == null) return child;
@@ -122,7 +136,7 @@ class _HomeScreenForMcqsState extends State<HomeScreenForMcqs> {
                                         //         : null,
                                         //   );
                                         // },
-                                      ),
+                                      //),
                                       // Image.network(iconImages[index],
                                       //   height: 50,
                                       //   width: 50,

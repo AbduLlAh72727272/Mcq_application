@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:usefulmcqapp/view_model/fetch_mcqs.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 
 class DisplayMcqs extends StatefulWidget {
@@ -131,30 +132,38 @@ class _DisplayMcqsState extends State<DisplayMcqs> {
                       SizedBox(
                         height: 20,
                       ),
-                      Image.network(
-                        'https://cdn-icons-png.flaticon.com/512/3065/3065702.png',
-                        height: 150,
-                        width: 150,
+                      CachedNetworkImage(
+                        imageUrl:  'https://cdn-icons-png.flaticon.com/512/3261/3261308.png',
+                        height: 80,
+                        width: 80,
                         fit: BoxFit.fill,
-
-                        loadingBuilder: (BuildContext context, Widget child,
-                            ImageChunkEvent? loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return Container(
-                            height: 150,
-                            width: 150,
-                            child: Center(
-                              child: CircularProgressIndicator(
-                                color: Color(0xFF7456F5),
-                                value: loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                                    : null,
-                              ),
-                            ),
-                          );
-                        },
+                        placeholder: (context, url) => CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
+                      // Image.network(
+                      //   'https://cdn-icons-png.flaticon.com/512/3261/3261308.png',
+                      //   height: 150,
+                      //   width: 150,
+                      //   fit: BoxFit.fill,
+                      //
+                      //   loadingBuilder: (BuildContext context, Widget child,
+                      //       ImageChunkEvent? loadingProgress) {
+                      //     if (loadingProgress == null) return child;
+                      //     return Container(
+                      //       height: 150,
+                      //       width: 150,
+                      //       child: Center(
+                      //         child: CircularProgressIndicator(
+                      //           color: Color(0xFF7456F5),
+                      //           value: loadingProgress.expectedTotalBytes != null
+                      //               ? loadingProgress.cumulativeBytesLoaded /
+                      //               loadingProgress.expectedTotalBytes!
+                      //               : null,
+                      //         ),
+                      //       ),
+                      //     );
+                      //   },
+                      // ),
                       // Image.network(
                       //   'https://cdn-icons-png.flaticon.com/512/3065/3065702.png',
                       //   height: 150,
@@ -162,7 +171,7 @@ class _DisplayMcqsState extends State<DisplayMcqs> {
                       //   fit: BoxFit.fill,
                       // ),
                       SizedBox(
-                        height: 10,
+                        height: 40,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
