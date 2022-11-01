@@ -71,6 +71,10 @@ int get sum=>_sum;
     // // });
      return "Okay";
   }
+  clearListById(){
+    _listById.clear();
+    notifyListeners();
+  }
   getListById(String title,BuildContext context){
     _sum=0;
      print("title is $title");

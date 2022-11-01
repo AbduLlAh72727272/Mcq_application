@@ -30,7 +30,7 @@ class _DisplayMcqsState extends State<DisplayMcqs> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF7456F5),
         onPressed: (){
-          if(i<=context.read<FetchMcqs>().listById.length){
+          if(i<=context.read<FetchMcqs>().listById.length-1){
             setState(() {
               ++i;
             });
@@ -80,6 +80,7 @@ class _DisplayMcqsState extends State<DisplayMcqs> {
                       children: [
                         InkWell(
                           onTap:(){
+                            context.read<FetchMcqs>().clearListById();
                             Navigator.pop(context);
 
 
@@ -118,7 +119,7 @@ class _DisplayMcqsState extends State<DisplayMcqs> {
             SizedBox(
               height: 150,
             ),
-            Text('Question ${context.watch<FetchMcqs>().sum+1}',
+            Text('Question ${i+1} / ${context.watch<FetchMcqs>().sum+1}',
               style: TextStyle(
                 color: Color(0xFF979799),
                 fontSize: 18,
